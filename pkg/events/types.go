@@ -185,3 +185,22 @@ func objectMetadata(o interface{}, t ObjectType) kapi.ObjectMeta {
 	}
 	return kapi.ObjectMeta{}
 }
+
+func (e *Event) Ignorable() bool {
+	if e.EventType == None {
+		return true
+	}
+
+	if e.EventType == Updated {
+		// updated called but only old object is present.
+		if len(e.RuntimeObj) <= 1 {
+			return true
+		}
+
+		// updated but both are equal. no changes
+		if reflect.DeepEqual(e.RuntimeObj[0], e.RuntimeObj[1]) {
+			return true
+		}
+	}
+	return false
+}
