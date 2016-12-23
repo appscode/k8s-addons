@@ -1,5 +1,5 @@
 hash: 60216470dfe578f56b403265a19501a14d033248a5d362b81388cc7524d7da1b
-updated: 2016-12-21T06:47:26.440725139-08:00
+updated: 2016-12-22T19:39:59.266626651-08:00
 imports:
 - name: cloud.google.com/go
   version: 3b1ae45394a234c385be014e9a488f2bb6eef821
@@ -80,6 +80,10 @@ imports:
   - vanity/command
 - name: github.com/golang/glog
   version: 44145f04b68cf362d9c4df2182967c2275eaefed
+- name: github.com/golang/groupcache
+  version: 02826c3e79038b59d737d3b1c0a1d937f71a4433
+  subpackages:
+  - lru
 - name: github.com/golang/protobuf
   version: 8616e8ee5e20a1704615e6c8d7afcdac06087a67
   subpackages:
@@ -250,7 +254,10 @@ imports:
   - pkg/client/clientset_generated/release_1_5/typed/rbac/v1alpha1/fake
   - pkg/client/clientset_generated/release_1_5/typed/storage/v1beta1
   - pkg/client/clientset_generated/release_1_5/typed/storage/v1beta1/fake
+  - pkg/client/leaderelection
+  - pkg/client/leaderelection/resourcelock
   - pkg/client/metrics
+  - pkg/client/record
   - pkg/client/restclient
   - pkg/client/testing/core
   - pkg/client/transport
@@ -292,6 +299,7 @@ imports:
   - pkg/util/rand
   - pkg/util/runtime
   - pkg/util/sets
+  - pkg/util/strategicpatch
   - pkg/util/uuid
   - pkg/util/validation
   - pkg/util/validation/field
@@ -303,6 +311,7 @@ imports:
   - plugin/pkg/client/auth
   - plugin/pkg/client/auth/gcp
   - plugin/pkg/client/auth/oidc
+  - third_party/forked/golang/json
   - third_party/forked/golang/reflect
   - third_party/forked/golang/template
 testImports:
