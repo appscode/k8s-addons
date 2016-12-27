@@ -44,7 +44,7 @@ func fixPodSpec(podSpec api.PodSpec) api.PodSpec {
 	if len(podSpec.Containers) == 0 {
 		podSpec.Containers = []api.Container{
 			api.Container{
-				Name:    rand.Characters(6),
+				Name:    rand.WithUniqSuffix("container"),
 				Image:   Image,
 				Command: []string{"sleep", "3600"},
 			},
@@ -80,7 +80,7 @@ func CreateKubernetesObject(kubeClient clientset.Interface, kubeObject interface
 	case *api.ReplicationController:
 		replicationController := kubeObject.(*api.ReplicationController)
 		if replicationController.Name == "" {
-			replicationController.Name = rand.Characters(10)
+			replicationController.Name = rand.WithUniqSuffix("e2e-rc")
 		}
 		replicationController.Spec.Template = fixPodTemplateSpecPtr(replicationController.Spec.Template)
 		replicationController.Spec.Selector = replicationController.Spec.Template.Labels
@@ -92,7 +92,7 @@ func CreateKubernetesObject(kubeClient clientset.Interface, kubeObject interface
 	case *extensions.DaemonSet:
 		daemonSet := kubeObject.(*extensions.DaemonSet)
 		if daemonSet.Name == "" {
-			daemonSet.Name = rand.Characters(10)
+			daemonSet.Name = rand.WithUniqSuffix("e2e-daemonset")
 		}
 		daemonSet.Spec.Template = fixPodTemplateSpec(daemonSet.Spec.Template)
 		daemonSet.Spec.Selector = &unversioned.LabelSelector{
@@ -103,7 +103,7 @@ func CreateKubernetesObject(kubeClient clientset.Interface, kubeObject interface
 	case *apps.StatefulSet:
 		statefulSet := kubeObject.(*apps.StatefulSet)
 		if statefulSet.Name == "" {
-			statefulSet.Name = rand.Characters(10)
+			statefulSet.Name = rand.WithUniqSuffix("e2e-statefulset")
 		}
 		statefulSet.Spec.Template = fixPodTemplateSpec(statefulSet.Spec.Template)
 		statefulSet.Spec.Selector = &unversioned.LabelSelector{
@@ -117,7 +117,7 @@ func CreateKubernetesObject(kubeClient clientset.Interface, kubeObject interface
 	case *extensions.ReplicaSet:
 		replicaSet := kubeObject.(*extensions.ReplicaSet)
 		if replicaSet.Name == "" {
-			replicaSet.Name = rand.Characters(10)
+			replicaSet.Name = rand.WithUniqSuffix("e2e-replicaset")
 		}
 		replicaSet.Spec.Template = fixPodTemplateSpec(replicaSet.Spec.Template)
 		replicaSet.Spec.Selector = &unversioned.LabelSelector{
@@ -131,7 +131,7 @@ func CreateKubernetesObject(kubeClient clientset.Interface, kubeObject interface
 	case *extensions.Deployment:
 		deployment := kubeObject.(*extensions.Deployment)
 		if deployment.Name == "" {
-			deployment.Name = rand.Characters(10)
+			deployment.Name = rand.WithUniqSuffix("e2e-deployment")
 		}
 		deployment.Spec.Template = fixPodTemplateSpec(deployment.Spec.Template)
 		deployment.Spec.Selector = &unversioned.LabelSelector{
@@ -145,7 +145,7 @@ func CreateKubernetesObject(kubeClient clientset.Interface, kubeObject interface
 	case *api.Pod:
 		pod := kubeObject.(*api.Pod)
 		if pod.Name == "" {
-			pod.Name = rand.Characters(10)
+			pod.Name = rand.WithUniqSuffix("e2e-pod")
 		}
 		pod.Spec = fixPodSpec(pod.Spec)
 		pod, err = kubeClient.Core().Pods(fixNamespace(pod.Namespace)).Create(pod)
@@ -153,7 +153,7 @@ func CreateKubernetesObject(kubeClient clientset.Interface, kubeObject interface
 	case *api.Service:
 		service := kubeObject.(*api.Service)
 		if service.Name == "" {
-			service.Name = rand.Characters(10)
+			service.Name = rand.WithUniqSuffix("e2e-svc")
 		}
 		service.Spec = fixServiceSpec(service.Spec)
 		service, err = kubeClient.Core().Services(fixNamespace(service.Namespace)).Create(service)
