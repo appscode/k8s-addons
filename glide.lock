@@ -168,15 +168,15 @@ imports:
 - name: k8s.io/kubernetes
   version: 5f332aab13e58173f85fd204a2c77731f7a2573f
   subpackages:
-  - pkg/aci
-  - pkg/aci/errors
-  - pkg/aci/install
-  - pkg/aci/meta
-  - pkg/aci/meta/metatypes
-  - pkg/aci/resource
-  - pkg/aci/unversioned
-  - pkg/aci/v1
-  - pkg/aci/validation/path
+  - pkg/api
+  - pkg/api/errors
+  - pkg/api/install
+  - pkg/api/meta
+  - pkg/api/meta/metatypes
+  - pkg/api/resource
+  - pkg/api/unversioned
+  - pkg/api/v1
+  - pkg/api/validation/path
   - pkg/apimachinery
   - pkg/apimachinery/announced
   - pkg/apimachinery/registered
@@ -263,7 +263,7 @@ imports:
   - pkg/client/transport
   - pkg/client/typed/discovery
   - pkg/client/typed/discovery/fake
-  - pkg/client/unversioned/clientcmd/aci
+  - pkg/client/unversioned/clientcmd/api
   - pkg/conversion
   - pkg/conversion/queryparams
   - pkg/fields
