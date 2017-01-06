@@ -39,6 +39,6 @@ func (a *FakeExtensionClient) Alert(namespace string) clientset.AlertInterface {
 	return &FakeAlert{a.Fake, namespace}
 }
 
-func (m *FakeExtensionClient) Certificates(ns string) clientset.CertificateInterface {
+func (m *FakeExtensionClient) Certificate(ns string) clientset.CertificateInterface {
 	return &FakeCertificate{m.Fake, ns}
 }
