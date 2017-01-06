@@ -4,6 +4,7 @@ import (
 	"github.com/appscode/k8s-addons/client/clientset"
 	"k8s.io/kubernetes/pkg/api"
 	"k8s.io/kubernetes/pkg/apimachinery/registered"
+	rest "k8s.io/kubernetes/pkg/client/restclient"
 	testing "k8s.io/kubernetes/pkg/client/testing/core"
 	"k8s.io/kubernetes/pkg/runtime"
 	"k8s.io/kubernetes/pkg/watch"
@@ -12,6 +13,8 @@ import (
 type FakeExtensionClient struct {
 	*testing.Fake
 }
+
+var _ clientset.AppsCodeExtensionInterface = &FakeExtensionClient{}
 
 func NewFakeExtensionClient(objects ...runtime.Object) *FakeExtensionClient {
 	o := testing.NewObjectTracker(api.Scheme, api.Codecs.UniversalDecoder())
@@ -39,6 +42,13 @@ func (a *FakeExtensionClient) Alert(namespace string) clientset.AlertInterface {
 	return &FakeAlert{a.Fake, namespace}
 }
 
-func (m *FakeExtensionClient) Certificates(ns string) clientset.CertificateInterface {
+func (m *FakeExtensionClient) Certificate(ns string) clientset.CertificateInterface {
 	return &FakeCertificate{m.Fake, ns}
+}
+
+// RESTClient returns a RESTClient that is used to communicate
+// with API server by this client implementation.
+func (c *FakeExtensionClient) RESTClient() rest.Interface {
+	var ret *rest.RESTClient
+	return ret
 }
