@@ -1,16 +1,11 @@
 package dns
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"strings"
 
 	clientset "k8s.io/kubernetes/pkg/client/clientset_generated/internalclientset"
-)
-
-const (
-	PodNamespace string = "POD_NAMESPACE"
 )
 
 func GetServiceClusterIP(client clientset.Interface, prefix, hostname string) (string, error) {
@@ -33,11 +28,8 @@ func GetServiceClusterIP(client clientset.Interface, prefix, hostname string) (s
 func splitHostname(hostName string) (string, string, error) {
 	parts := strings.Split(hostName, ".")
 	if len(parts) == 1 {
-		namespace := os.Getenv(PodNamespace)
-		if namespace != "" {
-			return parts[0], namespace, nil
-		}
-		return "", "", errors.New("Kubernetes namespace not found in ENV")
+		namespace := "default"
+		return parts[0], namespace, nil
 	} else if len(parts) == 2 {
 		return parts[0], parts[1], nil
 	}
