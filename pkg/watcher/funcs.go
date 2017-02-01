@@ -176,7 +176,6 @@ func EndpointListFunc(c clientset.Interface) func(kapi.ListOptions) (runtime.Obj
 	}
 }
 
-
 func EndpointWatchFunc(c clientset.Interface) func(options kapi.ListOptions) (watch.Interface, error) {
 	return func(options kapi.ListOptions) (watch.Interface, error) {
 		return c.Core().Endpoints(kapi.NamespaceAll).Watch(options)
@@ -188,7 +187,6 @@ func NodeListFunc(c clientset.Interface) func(kapi.ListOptions) (runtime.Object,
 		return c.Core().Nodes().List(opts)
 	}
 }
-
 
 func NodeWatchFunc(c clientset.Interface) func(options kapi.ListOptions) (watch.Interface, error) {
 	return func(options kapi.ListOptions) (watch.Interface, error) {

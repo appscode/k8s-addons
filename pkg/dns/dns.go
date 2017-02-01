@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 
+	kapi "k8s.io/kubernetes/pkg/api"
 	clientset "k8s.io/kubernetes/pkg/client/clientset_generated/internalclientset"
 )
 
@@ -28,8 +29,7 @@ func GetServiceClusterIP(client clientset.Interface, prefix, hostname string) (s
 func splitHostname(hostName string) (string, string, error) {
 	parts := strings.Split(hostName, ".")
 	if len(parts) == 1 {
-		namespace := "default"
-		return parts[0], namespace, nil
+		return parts[0], kapi.NamespaceDefault, nil
 	} else if len(parts) == 2 {
 		return parts[0], parts[1], nil
 	}
