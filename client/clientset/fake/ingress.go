@@ -72,7 +72,7 @@ func (mock *FakeIngress) Update(svc *aci.Ingress) (*aci.Ingress, error) {
 }
 
 // Delete deletes a Ingress by name.
-func (mock *FakeIngress) Delete(name string, _ *api.DeleteOptions) error {
+func (mock *FakeIngress) Delete(name string) error {
 	_, err := mock.Fake.
 		Invokes(testing.NewDeleteAction(ingressResource, mock.ns, name), &aci.Ingress{})
 

@@ -72,7 +72,7 @@ func (mock *FakeCertificate) Update(svc *aci.Certificate) (*aci.Certificate, err
 }
 
 // Delete deletes a Certificate by name.
-func (mock *FakeCertificate) Delete(name string, _ *api.DeleteOptions) error {
+func (mock *FakeCertificate) Delete(name string) error {
 	_, err := mock.Fake.
 		Invokes(testing.NewDeleteAction(certResource, mock.ns, name), &aci.Certificate{})
 

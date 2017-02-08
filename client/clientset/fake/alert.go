@@ -72,7 +72,7 @@ func (mock *FakeAlert) Update(svc *aci.Alert) (*aci.Alert, error) {
 }
 
 // Delete deletes a Alert by name.
-func (mock *FakeAlert) Delete(name string, _ *api.DeleteOptions) error {
+func (mock *FakeAlert) Delete(name string) error {
 	_, err := mock.Fake.
 		Invokes(testing.NewDeleteAction(alertResource, mock.ns, name), &aci.Alert{})
 
