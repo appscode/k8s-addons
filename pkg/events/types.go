@@ -86,7 +86,7 @@ const (
 	ConfigMap       ObjectType = "configmaps"
 	DaemonSet       ObjectType = "daemonsets"
 	Endpoint        ObjectType = "endpoints"
-	ExtendedIngress ObjectType = "ingresses"
+	ExtendedIngress ObjectType = "extendedingresses"
 	Ingress         ObjectType = "ingresses"
 	Namespace       ObjectType = "namespaces"
 	Node            ObjectType = "nodes"
