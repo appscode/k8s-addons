@@ -46,10 +46,6 @@ func (m *FakeExtensionClient) Certificate(ns string) clientset.CertificateInterf
 	return &FakeCertificate{m.Fake, ns}
 }
 
-func (m *FakeExtensionClient) Backups(ns string) clientset.BackupInterface {
-	return &FakeBackup{m.Fake, ns}
-}
-
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
 func (c *FakeExtensionClient) RESTClient() rest.Interface {
